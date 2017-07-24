@@ -18,11 +18,11 @@ class Lambda {
   }
 
   inline fun beforeAndAfterInline(
-      startString: String,
-      function: (string: String) -> String
+      start: String?,
+      function: (string: String?) -> String
   ) {
-    print("Before: $startString")
-    val after = function(startString)
+    print("Before: $start")
+    val after = function(start)
     print("After: $after")
   }
 
@@ -35,17 +35,20 @@ class Lambda {
   //  “After: hello world"
 
   fun calling() {
-    beforeAndAfterInline("hello", { string -> string + " world" })
-    beforeAndAfterInline("hello", { it + " world"})
-    beforeAndAfterInline("hello") { it + " world"}
+    beforeAndAfter("hello",
+        { string: String -> string + " world" }
+    )
+    beforeAndAfter("hello", { string -> string + " world" })
+    beforeAndAfter("hello", { it + " world" })
+    beforeAndAfter("hello") { it + " world" }
   }
 
   fun beforeAndAfter(
-      startString: String,
+      start: String,
       function: (string: String) -> String
   ) {
-    print("Before: $startString")
-    val after = function(startString)
+    print("Before: $start")
+    val after = function(start)
     print("After: $after")
   }
 
